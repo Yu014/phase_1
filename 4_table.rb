@@ -15,9 +15,3 @@ p table[2][2] == "Femenino"
 p table[3][3] == "Primero"
 p table[3][4] == [8, 7, 7, 9, 8]
 p table[4][4][2] == 6
-
-# gato = [ ["X", "X", "O"],
-#          ["O", "X", "O"],
-#          ["O", "O", "X"] ]
-
-# p gato[1][2]
