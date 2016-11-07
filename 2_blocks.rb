@@ -1,8 +1,15 @@
-# gato = [ ["X", "X", "O"],
-#          ["O", "X", "O"],
-#          ["O", "O", "X"] ]
+# def do_this_block
+#     # block =
+#      yield
+# end
 
-# p gato[1][2]
+# puts do_this_block { 1 + 1 }
+
+# name = "Fernando"
+
+# do_this_block do 
+#     puts name * 3
+# end
 
 def gato
   hash = { 4 => "X", 5 =>"O"}
@@ -16,14 +23,14 @@ def gato
     }
   end
   cat.each_slice(3).to_a
+  p "In the method at #{Time.now}"
+  yield
 end
 
-p gato[0]
-p gato[1]
-p gato[2]
-
-10.times do |variable|
-    raise "Not good" if gato == gato
+gato do
+  sleep(5)
+  p "In the block at #{Time.now}"
 end
-p true
+
+
 
