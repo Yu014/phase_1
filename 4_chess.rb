@@ -55,13 +55,16 @@ def chess_maker(hash)
   chess << peones(hash).map { |word| "#{word}-B" }
   chess << fichas(hash).map { |word| "#{word}-B" }
 
+  chess.each { |x| puts "#{x}" }
+
 end
 
-p chess_maker(hash) == [["Torre-N", "Caballo-N", "Alfil-N", "Rey-N", "Reyna-N", "Alfil-N", "Caballo-N", "Torre-N"],
-                        ["Peón-N", "Peón-N", "Peón-N", "Peón-N", "Peón-N", "Peón-N", "Peón-N", "Peón-N"],
-                        ["Blanco", "Negro", "Blanco", "Negro", "Blanco", "Negro", "Blanco", "Negro"],
-                        ["Negro", "Blanco", "Negro", "Blanco", "Negro", "Blanco", "Negro", "Blanco"],
-                        ["Blanco", "Negro", "Blanco", "Negro", "Blanco", "Negro", "Blanco", "Negro"],
-                        ["Negro", "Blanco", "Negro", "Blanco", "Negro", "Blanco", "Negro", "Blanco"],
-                        ["Peón-B", "Peón-B", "Peón-B", "Peón-B", "Peón-B", "Peón-B", "Peón-B", "Peón-B"],
-                        ["Torre-B", "Caballo-B", "Alfil-B", "Rey-B", "Reyna-B", "Alfil-B", "Caballo-B", "Torre-B"]]
+chess_maker(hash)
+# p chess_maker(hash)[0]
+# p chess_maker(hash)[1]
+# p chess_maker(hash)[2]
+# p chess_maker(hash)[3]
+# p chess_maker(hash)[4]
+# p chess_maker(hash)[5]
+# p chess_maker(hash)[6]
+# p chess_maker(hash)[7]
