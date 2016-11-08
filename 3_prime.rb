@@ -1,27 +1,37 @@
-# Deberás crear un método que reciba un integer y devuelva un
-# array con la combinación de números primos que lo componen.
-# Escribe pseudocódigo antes de empezar con el código.
+# Definir el método prime_factors, que recibe un número entero como variable.
+#   Requerir el método 'prime' de ruby
+#   Asignar un nombre al array que contendrá los (x) primeros números primos
+#   Definir un array vacío
+#   Declara num = num_variable
+#   Itera sobre el arreglo de numeros primos
+#     Yield
+#     IF mi array de primos incluye el numero_de_veces que cabe el divisor
+#       Manda el número de veces al array vacío
+#     ELSE 
+#       Divide numero_de_veces entre el 1er numero del ar de primos
+#     ENDIF
+# ENDDEF
+    
 
-Definir el método prime_factors, que recibe un número entero como variable.
-  Requerir el método 'prime' de ruby
-  Asignar un nombre al array que contendrá los (x) primeros números primos
-  Definir un array vacío
-  # IF el número es divisible entre el 1er elemento del array con un residuo de 0
-  #   agrega el 1er elemento del array al array vacío
-  # ELSIF el número es divisible entre el 2do elemento del array con un residuo de 0
-  #   agrega el 2do elemento del array al array vacío
-  Itera sobre arreglo de numeros primos
+# Bloque de código prime_factors
+#   IF mi num divisible entre el primer numero del arreglo con un remanente de 0 == TRUE
+#     Manda el numero del arreglo a mi array vacío
 
 
-# def prime_factors(num)
-#   require 'prime'
-#   primes = Prime.first(26)
-#   arr = []
-#   if num % primes[0] == 0
-#     arr << primes[0]
-#   end
-#   p arr
-# end
+def prime_factors(num)
+  require 'prime'
+  primes = Prime.first(26)
+  arr = []
+  primes.each do | prime |
+    veces, remanente = num.divmod(prime)
+    if remanente == 0
+    arr << prime
+    elsif primes.include?(veces) == true 
+    arr << veces
+    end
+  end
+  p arr
+end
 
 
 
@@ -31,7 +41,7 @@ Definir el método prime_factors, que recibe un número entero como variable.
 
 # Driver code
 
-# prime_factors(4) #=> [2, 2]
+prime_factors(4) #=> [2, 2]
 prime_factors(9) #=> [3, 3]
-# prime_factors(12) #=> [2, 2, 3]
-# prime_factors(34) #=> [2, 17]
+prime_factors(12) #=> [2, 2, 3]
+prime_factors(34) #=> [2, 17]
