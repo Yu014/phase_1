@@ -11,7 +11,7 @@ def fichas(hash)
   if (array.length == 5) == true
     second = array.reverse.drop(2)
   end
-  (array + second).flatten
+  array + second.flatten
 end
 
 # p fichas(hash)
@@ -21,7 +21,7 @@ def peones(hash)
   array = []
   hash.each { |key, value| 
     if key == 6 
-      8.times do array << ("#{value}") end
+      8.times do array << ("#{value}".ljust(5)) end
     end
   }
   array
@@ -33,9 +33,9 @@ def casillas(hash)
   array = []
   hash.each { |key, value|
     if key == 7 
-      array << ("#{value}") 
+      array << ("#{value}".ljust(7))
     elsif key == 8   
-      array << ("#{value}") 
+      array << ("#{value}".ljust(7)) 
     end
   }
   array*4
@@ -60,6 +60,7 @@ def chess_maker(hash)
 end
 
 chess_maker(hash)
+
 # p chess_maker(hash)[0]
 # p chess_maker(hash)[1]
 # p chess_maker(hash)[2]
