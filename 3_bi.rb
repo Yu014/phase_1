@@ -31,7 +31,14 @@ def binary_search(target, array, n)
 end
 
 
-p true if binary_search(target, array, n) == target
+# Esto no deberá arrojar una excepción
+50.times do |variable|
+    p "Si lo encuentra" if binary_search(target, array, n) == target
+end
+
+
+
+
 
 
 

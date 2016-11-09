@@ -22,7 +22,7 @@ p gato[0]
 p gato[1]
 p gato[2]
 
-10.times do |variable|
+50.times do |variable|
     raise "Not good" if gato == gato
 end
 p true
