@@ -1,8 +1,8 @@
 class Board
 @@boards_templates =  
-  # [["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
+  [["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
   # [["MANGO", "SANDIA", "MELON", "PLATANO"],"XXXXPXXXXLXAMXAXIEXTXDLXAXNOXNMANGOXSXXX"]
-  [["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
+  # [["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
   def initialize
      complete_board!
   end
@@ -30,11 +30,33 @@ class Board
   end
 
   def horizontal
-    # zero = 0
-    # lines = 
+    zero = 0
+    lines = 8
+    coincidence = false
+
+    # while coincidence == false
+      fix_ind = 0 
+      var_ind = 0
+      elements = @@boards_templates[0].length
+      while var_ind < elements
+        word = @@boards_templates[fix_ind][var_ind].split(//)
+        # p word
+        var_ind = var_ind + 1
+
+        master = complete_board!.each_slice(5).to_a
+        # p master
+        p master[0] == word
+        # p (array == word)
+
+
+      end
+
+    # end
+
     # if complete_board![0..4] == @@boards_templates[0][0].split(//)
     #   "The word #{@@boards_templates[0][0]} was found horizontally"
     # end
+
   end
 
   # def vertical
@@ -57,7 +79,7 @@ class Board
 end
 
 board = Board.new
-puts board.to_s
-puts board.word
-# p board.horizontal
+# puts board.to_s
+# puts board.word
+board.horizontal
 # puts board.include?("POEMA")
