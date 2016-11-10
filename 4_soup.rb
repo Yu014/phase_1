@@ -1,8 +1,8 @@
 class Board
 @@boards_templates =  
-  [["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
+  # [["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
   # [["MANGO", "SANDIA", "MELON", "PLATANO"],"XXXXPXXXXLXAMXAXIEXTXDLXAXNOXNMANGOXSXXX"]
-  # [["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
+  [["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
   def initialize
      complete_board!
   end
@@ -19,6 +19,36 @@ class Board
     end
   end
 
+  def word
+    fix_ind = 0 
+    var_ind = 0
+    elements = @@boards_templates[0].length
+    while var_ind < elements
+      p @@boards_templates[fix_ind][var_ind].split(//)
+      var_ind = var_ind + 1
+    end
+  end
+
+  def horizontal
+    # zero = 0
+    # lines = 
+    # if complete_board![0..4] == @@boards_templates[0][0].split(//)
+    #   "The word #{@@boards_templates[0][0]} was found horizontally"
+    # end
+  end
+
+  # def vertical
+  #   p word
+  # end
+
+  # def diagonal
+  #   p word
+  # end
+
+  def include?(word)
+    p word
+  end
+
   private
 
   def complete_board!
@@ -28,5 +58,6 @@ end
 
 board = Board.new
 puts board.to_s
-
- 
+puts board.word
+# p board.horizontal
+# puts board.include?("POEMA")
