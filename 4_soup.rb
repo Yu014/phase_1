@@ -35,7 +35,7 @@ class Board
     words = @@boards_templates[0].length
 
     while var_ind < words
-      word = @@boards_templates[fix_ind][var_ind].split(//)
+      word = @@boards_templates[fix_ind][var_ind]
       var_ind = var_ind + 1
 
       master = complete_board!.each_slice(5).to_a
@@ -44,30 +44,15 @@ class Board
       elements = master.length - 1
 
       while fila <= elements
-        # if (master[indx] == word) == true 
-        # word = word.join
-        # p "The word #{word} was found horizontally"
-        # elsif (master[indx].reverse == word) == true 
-        # word = word.join
-        # p "The word #{word} was found horizontally"
-        if (master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq.sort == word.uniq.sort) == true 
-        # word = word.join
+        if (master[indx].join("") == word) == true 
         p "The word #{word} was found horizontally"
-        # if (master[indx] == word) == false  
-          # p master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }
-          # p master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq!
-          # p master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq.sort
-          # p master[6].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq.sort == word.uniq.sort
-          # p word
-          # p word.uniq
-          # p word.uniq.sort
+        elsif master[indx].join("").reverse.include?(word) == true 
+        p "The word #{word} was found horizontally"
         end
         fila = fila += 1
         indx = indx += 1
       end
-
     end
-
   end
 
   # def vertical
