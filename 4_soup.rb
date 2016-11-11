@@ -1,8 +1,8 @@
 class Board
 @@boards_templates =  
-  [["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
+  # [["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
   # [["MANGO", "SANDIA", "MELON", "PLATANO"],"XXXXPXXXXLXAMXAXIEXTXDLXAXNOXNMANGOXSXXX"]
-  # [["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
+  [["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
   def initialize
      complete_board!
   end
@@ -30,32 +30,43 @@ class Board
   end
 
   def horizontal
-    zero = 0
-    lines = 8
-    coincidence = false
+    fix_ind = 0 
+    var_ind = 0
+    words = @@boards_templates[0].length
 
-    # while coincidence == false
-      fix_ind = 0 
-      var_ind = 0
-      elements = @@boards_templates[0].length
-      while var_ind < elements
-        word = @@boards_templates[fix_ind][var_ind].split(//)
-        # p word
-        var_ind = var_ind + 1
+    while var_ind < words
+      word = @@boards_templates[fix_ind][var_ind].split(//)
+      var_ind = var_ind + 1
 
-        master = complete_board!.each_slice(5).to_a
-        # p master
-        p master[0] == word
-        # p (array == word)
+      master = complete_board!.each_slice(5).to_a
+      indx = 0
+      fila = 0
+      elements = master.length - 1
 
-
+      while fila <= elements
+        # if (master[indx] == word) == true 
+        # word = word.join
+        # p "The word #{word} was found horizontally"
+        # elsif (master[indx].reverse == word) == true 
+        # word = word.join
+        # p "The word #{word} was found horizontally"
+        if (master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq.sort == word.uniq.sort) == true 
+        # word = word.join
+        p "The word #{word} was found horizontally"
+        # if (master[indx] == word) == false  
+          # p master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }
+          # p master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq!
+          # p master[indx].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq.sort
+          # p master[6].select { |char| char =~ /[(Regex.new("#{word}"))]/ }.uniq.sort == word.uniq.sort
+          # p word
+          # p word.uniq
+          # p word.uniq.sort
+        end
+        fila = fila += 1
+        indx = indx += 1
       end
 
-    # end
-
-    # if complete_board![0..4] == @@boards_templates[0][0].split(//)
-    #   "The word #{@@boards_templates[0][0]} was found horizontally"
-    # end
+    end
 
   end
 
