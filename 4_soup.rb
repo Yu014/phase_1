@@ -3,6 +3,7 @@ class Board
   # [["POEMA", "CANCION", "RONDAS", "RIMAS"],"POEMAXCXXXXAXXSXNXAAXCMXDXIXXNROXXOXNXXR"]
   # [["MANGO", "SANDIA", "MELON", "PLATANO"],"XXXXPXXXXLXAMXAXIEXTXDLXAXNOXNMANGOXSXXX"]
   [["ROJO", "VERDE", "AZUL", "NEGRO"],"OJORXXXXXXXEXXOXDXRXXRGLXXEXUXNVXZXXXXAX"]
+  
   def initialize
      complete_board!
   end
@@ -29,57 +30,57 @@ class Board
     end
   end
 
-  # def horizontal
-  #   fix_ind = 0 
-  #   var_ind = 0
-  #   words = @@boards_templates[0].length
+  def horizontal
+    fix_ind = 0 
+    var_ind = 0
+    words = @@boards_templates[0].length
 
-  #   while var_ind < words
-  #     word = @@boards_templates[fix_ind][var_ind]
-  #     var_ind = var_ind + 1
+    while var_ind < words
+      word = @@boards_templates[fix_ind][var_ind]
+      var_ind = var_ind + 1
 
-  #     master = complete_board!.each_slice(5).to_a
-  #     indx = 0
-  #     fila = 0
-  #     elements = master.length - 1
+      master = complete_board!.each_slice(5).to_a
+      indx = 0
+      fila = 0
+      elements = master.length - 1
 
-  #     while fila <= elements
-  #       if (master[indx].join("") == word) == true 
-  #       p "The word #{word} was found horizontally"
-  #       elsif master[indx].join("").reverse.include?(word) == true 
-  #       p "The word #{word} was found horizontally"
-  #       end
-  #       fila = fila += 1
-  #       indx = indx += 1
-  #     end
-  #   end
-  # end
+      while fila <= elements
+        if (master[indx].join("") == word) == true 
+        p "The word #{word} was found horizontally"
+        elsif master[indx].join("").reverse.include?(word) == true 
+        p "The word #{word} was found horizontally"
+        end
+        fila = fila += 1
+        indx = indx += 1
+      end
+    end
+  end
 
-  # def vertical
-  #   fix_ind = 0 
-  #   var_ind = 0
-  #   words = @@boards_templates[0].length
+  def vertical
+    fix_ind = 0 
+    var_ind = 0
+    words = @@boards_templates[0].length
 
-  #   while var_ind < words
-  #     word = @@boards_templates[fix_ind][var_ind]
-  #     var_ind = var_ind + 1
+    while var_ind < words
+      word = @@boards_templates[fix_ind][var_ind]
+      var_ind = var_ind + 1
 
-  #     master = complete_board!.each_slice(5).to_a.transpose
-  #     indx = 0
-  #     column = 0
-  #     elements = 4
+      master = complete_board!.each_slice(5).to_a.transpose
+      indx = 0
+      column = 0
+      elements = 4
 
-  #     while column <= elements
-  #       if master[indx].join("").include?(word) == true 
-  #       p "The word #{word} was found vertically"
-  #       elsif master[indx].join("").reverse.include?(word) == true 
-  #       p "The word #{word} was found vertically"
-  #       end
-  #       column = column += 1
-  #       indx = indx += 1
-  #     end
-  #   end
-  # end
+      while column <= elements
+        if master[indx].join("").include?(word) == true 
+        p "The word #{word} was found vertically"
+        elsif master[indx].join("").reverse.include?(word) == true 
+        p "The word #{word} was found vertically"
+        end
+        column = column += 1
+        indx = indx += 1
+      end
+    end
+  end
 
   def diagonal
     fix_ind = 0 
@@ -91,45 +92,43 @@ class Board
       var_ind = var_ind + 1
 
       master = complete_board!.each_slice(5).to_a
-      p master
       filas = 7
       init = 4
       fila = 4
       columna = 0
       columnas = 4
-      fix = fila + 2
-      top = (fila - columnas)
-      
+      start =  4
+      zero = 0
       
       while init <= filas
-        p "Itera en la fila: #{init}."
+        # "Itera en la fila: #{init}."
         something = ""
+        top = (fila - columnas)
         while fila >= top
+          # p "Top right now is #{top}"
+          # p "Fila: #{fila}"
+          # p "Columna: #{columna}"
           something << master[fila][columna]
-          p something
           if something.include?(word) == true
             p "The word #{word} was found diagonally"
           elsif something.reverse.include?(word) == true
-            p "The word #{word} was found vertically"
-          else
-            p "Not in here"
-            p fila
+            p "The word #{word} was found diagonally"
           end
-          p fila = fila -= 1
+          fila = fila -= 1
           columna = columna += 1
         end
         init = init += 1
-        p fila.nil?
-        p columna.nil?
-        p something.nil?
-        # fila = fila + fix
+        fila = start += 1
+        columna = zero
       end
     end
   end
 
-  # def include?(word)
-  #   p word
-  # end
+   def include?
+     horizontal
+     vertical
+     diagonal
+   end
 
   private
 
@@ -139,9 +138,9 @@ class Board
 end
 
 board = Board.new
-# puts board.to_s
+puts board.to_s
 # puts board.word
 # board.horizontal
 # board.vertical
-board.diagonal
-# puts board.include?("POEMA")
+# board.diagonal
+puts board.include?
