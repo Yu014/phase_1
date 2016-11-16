@@ -1,11 +1,7 @@
 class Vehicle
   attr_reader :age
   def what_am_i?
-    # Este método va a ser utilizado por varias clases y deberá regresar 
-    # el nombre de la clase desde la cual se corrió.
-    # ej.
-    # bocho = Car.new
-    # bocho.what_am_i? => Car
+    self.class
   end
   def number_of_wheels
     4
@@ -37,6 +33,9 @@ class Motorbike < Motorized
   def age
     "9 years"
   end
+  def number_of_wheels
+    2
+  end
 end
 
 class Car < Motorized
@@ -57,6 +56,9 @@ class Bicycle < Motorized
   end
   def age
     "4 years"
+  end
+  def number_of_wheels
+    2
   end
 end
 
