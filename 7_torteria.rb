@@ -1,3 +1,4 @@
+$cheking
 class Torta
   attr_accessor :name, :time, :quantity
   def initialize(name, time, quantity)
@@ -10,23 +11,28 @@ class Torta
   end
 end
 
-class Horno
-  def charola
-    # 4 tortas
-    @tort_capacity = 4
+class Tortero
+  def working?
+    t = Time.now
+    (t.hour > 9) && (t.hour < 20) ? true : false
+  end 
+  def cooking!
+    if working? == true
+      p "We are open and I'm cooking your tortas"
+    else
+      p "Sorry, we are closed, come tomorrow for your torta"
+    end
   end
-  def capacity
-    # 2 charolas
-    @char_capacity = 2 
-  end
-  def horneando
-  end
-  def status
+  def cheking_tortas_every(min)
+    $cheking = min
   end
 end
 
-class Reloj
-  attr_accessor :set
+class Horno < Tortero
+  attr_accessor :set, :horneando, :status
+  def initialize(tray)
+  @tray = tray
+  end
   def set=(value)
     @set = value
     p "The clock was set in #{@set} minutes"
@@ -45,31 +51,71 @@ class Reloj
       p "tick tick tick ..."
     end
   end
+  def baking
+    # if @tray.empty? != false
+    # end
+  end
+  def status
+    p "Martin abrió el horno para checar las tortas a los #{$cheking} minutos"
+    @tray.each do |torta|
+      if torta.name == "milanesa"
+        if $cheking < torta.time
+          p "La torta de #{torta.name} está cruda"
+        elsif $cheking == torta.time
+          p "La torta de #{torta.name} está lista!"
+        else $cheking > torta.time
+          p "La torta de #{torta.name} está quemada"
+        end
+      elsif torta.name == "jamon"
+        if $cheking < torta.time
+          p "La torta de #{torta.name} está cruda"
+        elsif $cheking == torta.time
+          p "La torta de #{torta.name} está lista!"
+        else $cheking > torta.time
+          p "La torta de #{torta.name} está quemada"
+        end
+      elsif torta.name == "salchicha"
+        if $cheking < torta.time
+          p "La torta de #{torta.name} está cruda"
+        elsif $cheking == torta.time
+          p "La torta de #{torta.name} está lista!"
+        else $cheking > torta.time
+          p "La torta de #{torta.name} está quemada"
+        end
+      elsif torta.name == "huevo"
+        if $cheking < torta.time
+          p "La torta de #{torta.name} está cruda"
+        elsif $cheking == torta.time
+          p "La torta de #{torta.name} está lista!"
+        else $cheking > torta.time
+          p "La torta de #{torta.name} está quemada"
+        end
+      end
+    end
+  end
 end
 
-class Tortero
+torta_m = Torta.new("milanesa", 7, 5)
+torta_j = Torta.new("jamon", 5, 6)
+torta_s = Torta.new("salchicha", 10, 1)
+torta_h = Torta.new("huevo", 12, 3)
 
-  
-end
+tray = [torta_m, torta_j, torta_s, torta_h]
 
-torta_1 = Torta.new("milanesa", 7, 5)
-# torta_1.best_torta
-# p torta_1.name
-# p torta_1.time
+# tortas.each do |torta|
+#   puts torta.best_torta
+# end
 
-torta_2 = Torta.new("jamon", 5, 6)
-torta_3 = Torta.new("salchicha", 10, 1)
-torta_4 = Torta.new("huevo", 12, 3)
+martin = Tortero.new
+martin.cooking!
 
-tortas = [torta_1, torta_2, torta_3, torta_4]
+min = rand(2..15)
+martin.cheking_tortas_every(min)
 
-tortas.each do |torta|
-  puts torta.best_torta
-end
-
-
-# clock = Reloj.new
-# clock.set=("5")
-# clock.set
-# clock.countdown
-# clock.alarm
+horno = Horno.new(tray)
+# horno.set=("5")
+# horno.set
+# horno.countdown
+# horno.alarm
+horno.baking
+horno.status
