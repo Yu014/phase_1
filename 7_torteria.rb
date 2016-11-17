@@ -30,8 +30,8 @@ end
 
 class Horno < Tortero
   attr_accessor :set, :horneando, :status
-  def initialize(tray)
-  @tray = tray
+  def initialize(batch)
+  @batch = batch
   end
   def set=(value)
     @set = value
@@ -52,46 +52,64 @@ class Horno < Tortero
     end
   end
   def baking
-    # if @tray.empty? != false
-    # end
+    raise NoTortasInTheOvenError, "The tray is empty" if @batch.empty?
   end
   def status
     p "Martin abrió el horno para checar las tortas a los #{$cheking} minutos"
-    @tray.each do |torta|
+    @waste = 0
+    @good_torta = 0
+    @batch.each do |torta|
       if torta.name == "milanesa"
         if $cheking < torta.time
           p "La torta de #{torta.name} está cruda"
         elsif $cheking == torta.time
           p "La torta de #{torta.name} está lista!"
+          @good_torta += 1
         else $cheking > torta.time
           p "La torta de #{torta.name} está quemada"
+          @waste += 1
         end
       elsif torta.name == "jamon"
         if $cheking < torta.time
           p "La torta de #{torta.name} está cruda"
         elsif $cheking == torta.time
           p "La torta de #{torta.name} está lista!"
+          @good_torta += 1
         else $cheking > torta.time
           p "La torta de #{torta.name} está quemada"
+          @waste += 1
         end
       elsif torta.name == "salchicha"
         if $cheking < torta.time
           p "La torta de #{torta.name} está cruda"
         elsif $cheking == torta.time
           p "La torta de #{torta.name} está lista!"
+          @good_torta += 1
         else $cheking > torta.time
           p "La torta de #{torta.name} está quemada"
+          @waste += 1
         end
       elsif torta.name == "huevo"
         if $cheking < torta.time
           p "La torta de #{torta.name} está cruda"
         elsif $cheking == torta.time
           p "La torta de #{torta.name} está lista!"
+          @good_torta += 1
         else $cheking > torta.time
           p "La torta de #{torta.name} está quemada"
+          @waste += 1
         end
       end
     end
+  end
+  def finished_order?
+    arr = []
+    @batch.each do |torta|
+    arr << torta.quantity
+    end
+    request = arr.inject(:+)
+
+    @good_torta == request ? true : false
   end
 end
 
@@ -100,22 +118,27 @@ torta_j = Torta.new("jamon", 5, 6)
 torta_s = Torta.new("salchicha", 10, 1)
 torta_h = Torta.new("huevo", 12, 3)
 
-tray = [torta_m, torta_j, torta_s, torta_h]
-
-# tortas.each do |torta|
-#   puts torta.best_torta
-# end
+batch = [torta_m, torta_j, torta_s, torta_h]
 
 martin = Tortero.new
-martin.cooking!
 
-min = rand(2..15)
-martin.cheking_tortas_every(min)
-
-horno = Horno.new(tray)
+horno = Horno.new(batch)
 # horno.set=("5")
-# horno.set
 # horno.countdown
 # horno.alarm
-horno.baking
-horno.status
+
+batch.each do |torta|
+puts torta.best_torta
+end
+
+martin.cooking! 
+until horno.finished_order?
+
+  min = rand(2..15)
+  martin.cheking_tortas_every(min)
+  
+  horno.baking
+  horno.status
+  horno.finished_order?
+
+end
