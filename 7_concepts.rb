@@ -32,4 +32,4 @@
 
 # Polymorphism is the capacity of the code to change functionality.
 
-# Separation of Concerns refers to the separate responsability of each function.
+# Separation of Concerns refers to the separate responsability of each function and the less overlaping the better.
