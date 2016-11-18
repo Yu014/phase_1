@@ -132,13 +132,13 @@ puts torta.best_torta
 end
 
 martin.cooking! 
-until horno.finished_order?
+# until horno.finished_order?
 
-  min = rand(2..15)
-  martin.cheking_tortas_every(min)
+#   min = rand(2..15)
+#   martin.cheking_tortas_every(min)
   
-  horno.baking
-  horno.status
-  horno.finished_order?
+#   horno.baking
+#   horno.status
+#   horno.finished_order?
 
-end
+# end
