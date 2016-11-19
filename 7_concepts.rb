@@ -33,3 +33,9 @@
 # Polymorphism is the capacity of the code to change functionality.
 
 # Separation of Concerns refers to the separate responsability of each function and the less overlaping the better.
+
+
+# Orthogonality is the property that means "Changing A does not change B". 
+# An example of an orthogonal system would be a radio, where changing the station does not change the volume and vice-versa.
+# In programming languages this means that when you execute an instruction, nothing but that instruction
+#  happens (very important for debugging).

@@ -59,6 +59,7 @@ class Horno < Tortero
     @waste = 0
     @good_torta = 0
     @batch.each do |torta|
+      #Aquí vamos a aplicar un case con rangos para darle flexibilidad al programa :D
       if torta.name == "milanesa"
         if $cheking < torta.time
           p "La torta de #{torta.name} está cruda"
