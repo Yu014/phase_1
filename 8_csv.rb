@@ -39,7 +39,7 @@ end
 
 require "csv"
 
-#This class generates a new csv file
+# This class generates a new csv file
 class PersonWriter
   def initialize(file, people)
     @file = file
@@ -47,19 +47,19 @@ class PersonWriter
   end
   def create_csv
     #We open the file from the arguments, we recieve the name and the "wb" is the mode of the file.
-    CSV.open(@file, "wb") do |csv_obj|
+    CSV.open(@file, "wb") do |csv|
       @people.each do |person|
       #when we add the attributes of the persons into the csv file is important to separate them by their key name.
-      csv_obj << [person.first_name, person.last_name, person.email, person.phone, person.created_at]
+      csv << [person.first_name, person.last_name, person.email, person.phone, person.created_at]
       end
     end
   end
 end
 
-person_writer = PersonWriter.new("people.csv", people(12))
-person_writer.create_csv
+person_writer = PersonWriter.new("people.csv", people(10))
+writer = person_writer.create_csv
 
-#This class reads the csv file
+# This class reads the csv file
 class PersonParser
   def initialize(file)
     @file = file
@@ -67,7 +67,8 @@ class PersonParser
   def people
     array = []
     CSV.foreach(@file) do |row|
-      array << row
+      array << Person.new(row[0], row[1], row[2], row[3], row[4])
+      # array << row
     end
     p array
   end
@@ -76,21 +77,35 @@ parser = PersonParser.new("people.csv")
 people = parser.people
 
 
-#This class modifies the csv file
-# class ModifyingPerson
-#   def initialize(file, array)
-#     @file = file
-#     @array = array
-#   end
-#   def working
-#     array = []
-#     CSV.foreach(@file) do |row|
-#       array << row
-#     end
-#     p array
-#   end
-# end
+# This class modifies the array with strings and then re-writes the csv file
+class ModifyingPerson
+  def initialize(file, array)
+    @file = file
+    @array = array
+  end
+  def working
+    puts "¿A quién desea buscar?"
+    search_person = gets.chomp
+    puts "¿Cuál es el nuevo correo?"
+    new_mail = gets.chomp
 
-# change = ModifyingPerson.new("people.csv", people)
+    @array.each do |item|
+      if item.first_name == search_person
+        item.email = new_mail
+      end
+    end
+    p @array
+  end
+  # By calling the writer method inside the changes we rewrite the entire file
+  def rewrite_csv
+    CSV.open(@file, "wb") do |csv|
+      @array.each do |person|
+      csv << [person.first_name, person.last_name, person.email, person.phone, person.created_at]
+      end
+    end
+  end
+end
 
-# change.working
+change = ModifyingPerson.new("people.csv", people)
+change.working
+change.rewrite_csv
