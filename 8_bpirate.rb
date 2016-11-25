@@ -4,21 +4,17 @@ require 'uri'
 
 class Page
   def initialize(url)
-    @url = url
+    p @url = url[0..-1].join(' ')
     @response = Net::HTTP.get_response(URI(@url)).body
     @doc = Nokogiri::HTML(@response)
   end
 
   def fetch!
-    "url> #{@url}"
     "Fetching..."
   end
 
   def links
     #Regresa un array de los links de la página (texto/url).
-    count = 2
-    finish = 7
-    while count < finish
     arr = []
     nav = @doc.search(".nav-item")
     nav.map do |item|
@@ -29,8 +25,12 @@ class Page
     link.map do |item|
       links << item.search("a").first["href"]
     end
-    "   #{arr[count]}: #{links[count]}"
-    count += 1
+    
+    count = 2
+    finish = arr.length
+    while count < finish
+      p "   #{arr[count]}: #{links[count]}"
+      count += 1
     end
   end
 
@@ -41,7 +41,14 @@ class Page
   end
 end
 
-something = Page.new('http://www.codea.mx')
-puts something.fetch!
-puts something.title
-puts something.links
+class Browser 
+  def run!
+    input = ARGV
+    something = Page.new(input)
+    puts something.fetch!
+    puts something.title
+    puts something.links
+  end
+end
+
+Browser.new.run!
