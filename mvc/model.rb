@@ -14,21 +14,26 @@ class Record
     @file = "list.csv"
   end
 
-  def index
+  def reader
     array = []
     CSV.foreach("list.csv") do |item|
       array << item
     end
+    array
+  end
+
+  def index
     zero = 0
     count = 0
-    finish = array.length
+    finish = reader.length
     index = []
     while count < finish
-      index << array[count][zero]
+      index << reader[count][zero]
       count += 1
     end
     index
   end
+
 
   def add(val)
     new_task = [val]
@@ -59,10 +64,8 @@ class Record
   end
 
   def complete(val)
-    # if (val.to_i).integer? == true
-      p num = val.to_i - 1
-      p action = index[num]
-    # end
+    num = val.to_i - 1
+    action = index[num]
     array = []
     CSV.foreach(@file) do |row|
       array << Task.new(row[0], row[1])
@@ -77,5 +80,14 @@ class Record
         csv << [item.name, item.status]
       end
     end
+    one = 1
+    count = 0
+    finish = reader.length
+    truish = []
+    while count < finish
+      truish << reader[count][one]
+      count += 1
+    end
+    truish
   end
 end

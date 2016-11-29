@@ -9,10 +9,8 @@ class List
   menu(@input)
   end
   def index
-    # p "Estás dentro de controller"
     tasks = @model.index
     @view.show(tasks)
-    # user_data = @view.request_info
   end
   def menu(input) 
     call = input[0]
@@ -30,16 +28,20 @@ class List
   end
   def delete(task)
     if (task.to_i).integer? == true
-      p num = task.to_i - 1
+      num = task.to_i - 1
       action = @model.index[num]
       @view.delete(action)
     end
     @model.delete(task)
   end
   def complete(task)
-    # tasks = @model.index
-    # @view.completed(tasks)
-    p @model.complete(task)
+    if (task.to_i).integer? == true
+      num = task.to_i - 1
+      tasks = @model.index
+      action = @model.index[num]
+      boolearr = @model.complete(task)
+      @view.completed(action, tasks, boolearr)
+    end
   end
 end
 

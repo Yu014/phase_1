@@ -13,10 +13,12 @@ class View
       puts "#{idx + 1}." "#{task.capitalize!}"
     end
   end
-  def completed(tasks)
-    # puts "Completaste la tarea: '#{task.join(" ").capitalize!}'."
+  def completed(action, tasks, boolearr)
+    new_arr = []
+    boolearr.each{ |x| x == "true" ? new_arr << "[X]" : new_arr << "[ ]"}
+    puts "Completaste la tarea: '#{action.capitalize!}'."
     tasks.each_with_index do |task, idx|
-      puts "#{idx + 1}." "[ ] " "#{task.capitalize!}"
+        puts "#{idx + 1}." "#{new_arr[idx]}" "#{task.capitalize!}"
     end
   end
 end
