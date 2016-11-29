@@ -25,22 +25,21 @@ class List
     end
   end
   def add(task)
-    Task.new(task) 
-    @model.add(task)
+    @model.add(Task.new(task))
     @view.success(task)
   end
   def delete(task)
-    @model.delete(task)
     if (task.to_i).integer? == true
-      num = task.to_i - 1
+      p num = task.to_i - 1
       action = @model.index[num]
       @view.delete(action)
     end
-    
-    
+    @model.delete(task)
   end
   def complete(task)
-
+    # tasks = @model.index
+    # @view.completed(tasks)
+    p @model.complete(task)
   end
 end
 

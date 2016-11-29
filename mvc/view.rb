@@ -5,13 +5,18 @@ class View
     puts "Agregaste la tarea: '#{task.capitalize!}' a tu lista."
   end
   def delete(task)
-    puts "Eliminaste la tarea: '#{task.join(" ").capitalize!}' de tu lista."
+    puts "Eliminaste la tarea: '#{task.capitalize!}' de tu lista."
   end
   def show(tasks)
-    # p "Estás dentro de view"
     puts "Las tareas que hay en tu lista son:"
     tasks.each_with_index do |task, idx|
-      puts "#{idx + 1}." "#{task.join(" ")}"
+      puts "#{idx + 1}." "#{task.capitalize!}"
     end
-  end 
+  end
+  def completed(tasks)
+    # puts "Completaste la tarea: '#{task.join(" ").capitalize!}'."
+    tasks.each_with_index do |task, idx|
+      puts "#{idx + 1}." "[ ] " "#{task.capitalize!}"
+    end
+  end
 end
