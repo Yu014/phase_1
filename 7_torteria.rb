@@ -56,50 +56,21 @@ class Horno < Tortero
   end
   def status
     p "Martin abrió el horno para checar las tortas a los #{$cheking} minutos"
-    @waste = 0
-    @good_torta = 0
+    # @waste = 0
+    # @good_torta = 0
     @batch.each do |torta|
-      #Aquí vamos a aplicar un case con rangos para darle flexibilidad al programa :D
-      if torta.name == "milanesa"
-        if $cheking < torta.time
-          p "La torta de #{torta.name} está cruda"
-        elsif $cheking == torta.time
-          p "La torta de #{torta.name} está lista!"
-          @good_torta += 1
-        else $cheking > torta.time
-          p "La torta de #{torta.name} está quemada"
-          @waste += 1
-        end
-      elsif torta.name == "jamon"
-        if $cheking < torta.time
-          p "La torta de #{torta.name} está cruda"
-        elsif $cheking == torta.time
-          p "La torta de #{torta.name} está lista!"
-          @good_torta += 1
-        else $cheking > torta.time
-          p "La torta de #{torta.name} está quemada"
-          @waste += 1
-        end
-      elsif torta.name == "salchicha"
-        if $cheking < torta.time
-          p "La torta de #{torta.name} está cruda"
-        elsif $cheking == torta.time
-          p "La torta de #{torta.name} está lista!"
-          @good_torta += 1
-        else $cheking > torta.time
-          p "La torta de #{torta.name} está quemada"
-          @waste += 1
-        end
-      elsif torta.name == "huevo"
-        if $cheking < torta.time
-          p "La torta de #{torta.name} está cruda"
-        elsif $cheking == torta.time
-          p "La torta de #{torta.name} está lista!"
-          @good_torta += 1
-        else $cheking > torta.time
-          p "La torta de #{torta.name} está quemada"
-          @waste += 1
-        end
+      min = 1
+      raw = torta.time - 3
+      almost = torta.time - 2
+      perfect = torta.time
+      done = torta.time + 2
+      burn = torta.time + 3
+      max = 20
+      case torta.time
+      when min..raw then p "La torta de #{torta.name} está cruda"
+      when almost...perfect then p "La torta de #{torta.name} está casi lista"
+      when perfect..done then p "La torta de #{torta.name} está lista"
+      when done..max then p "La torta de #{torta.name} está quemada"
       end
     end
   end
@@ -109,7 +80,6 @@ class Horno < Tortero
     arr << torta.quantity
     end
     request = arr.inject(:+)
-
     @good_torta == request ? true : false
   end
 end
@@ -135,11 +105,11 @@ end
 martin.cooking! 
 # until horno.finished_order?
 
-#   min = rand(2..15)
-#   martin.cheking_tortas_every(min)
+  min = rand(2..15)
+  martin.cheking_tortas_every(min)
   
-#   horno.baking
-#   horno.status
-#   horno.finished_order?
+  horno.baking
+  horno.status
+  # horno.finished_order?
 
 # end
